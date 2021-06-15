@@ -1,0 +1,167 @@
+﻿<Window x:Class="WpfAppApiClientNetCore.EditData"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppApiClientNetCore"
+        mc:Ignorable="d"
+        DataContext="{Binding Source={StaticResource Locator}, Path=ApiConsumerViewModel}"
+        Title="EditData" Height="400" Width="400" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock 
+                    Text="Edit Person - " 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center" 
+                    FontSize="20"/>
+                <TextBlock 
+                    Text="{Binding SelectedItem.id}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center" 
+                    FontSize="20"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label 
+                x:Name="lblName" 
+                Content="Name" 
+                Grid.Row="1" 
+                Grid.Column="0" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                FontSize="20" />
+            <TextBox 
+                x:Name="txtName" 
+                Text="{Binding SelectedItem.name}" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                Width="150" 
+                Height="30" 
+                Grid.Row="1" 
+                Grid.Column="1"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label 
+                x:Name="lblEmail" 
+                Content="Email" 
+                Grid.Row="2" 
+                Grid.Column="0" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                FontSize="20" />
+            <TextBox 
+                x:Name="txtEmail" 
+                Text="{Binding SelectedItem.email}" 
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="150"
+                Height="30" 
+                Grid.Row="2" 
+                Grid.Column="1"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label 
+                x:Name="lblGender" 
+                Content="Gender" 
+                Grid.Row="3"
+                Grid.Column="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center" 
+                FontSize="20" />
+            <ComboBox 
+                Name="cbxGender"
+                ItemsSource="{Binding Genders}"
+                SelectedItem="{Binding SelectedItem.gender}"
+                IsSynchronizedWithCurrentItem="True"
+                Grid.Row="3" 
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="150" 
+                Height="30"/>
+        </Grid>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label 
+                x:Name="lblStatus"
+                Content="Status"
+                Grid.Row="4" 
+                Grid.Column="0" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                FontSize="20" />
+            <ComboBox 
+                Name="cbxStatus"
+                ItemsSource="{Binding Statuses}"
+                SelectedItem="{Binding SelectedItem.status}"
+                IsSynchronizedWithCurrentItem="True" 
+                Grid.Row="3" 
+                Grid.Column="1" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Width="150" 
+                Height="30"/>
+        </Grid>
+        <Grid Grid.Row="5">
+            <Button 
+                x:Name="btnEdit" 
+                Content="Edit" 
+                HorizontalAlignment="Center"  
+                VerticalAlignment="Center" 
+                IsEnabled="{Binding Path=navigationVisibility}"
+                Width="200" 
+                Height="30" Click="btnEdit_Click"/>
+        </Grid>
+        <Grid Grid.Row="6">
+            <StatusBar x:Name="stsBar" >
+                <TextBlock Text="Status : "/>
+                <TextBlock x:Name="lblStatusBar" Text="{Binding Path=MyStatus}" />
+            </StatusBar>
+        </Grid>
+        <TextBlock 
+            x:Name="lblIsSuccessful" 
+            Text="{Binding IsSuccessful, NotifyOnTargetUpdated=True, Mode=OneWay}" 
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center" 
+            Grid.Row="6" 
+            Grid.Column="0"
+            FontSize="20" 
+            TargetUpdated="lblIsSuccessful_TargetUpdated" 
+            Visibility="Hidden"/>
+        <TextBlock 
+            x:Name="lblIsError" 
+            Text="{Binding IsError, NotifyOnTargetUpdated=True, Mode=OneWay}"
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center" 
+            Grid.Row="6" 
+            Grid.Column="0" 
+            FontSize="20" 
+            TargetUpdated="lblIsError_TargetUpdated" 
+            Visibility="Hidden"/>
+    </Grid>
+</Window>

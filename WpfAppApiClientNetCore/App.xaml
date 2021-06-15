@@ -1,0 +1,11 @@
+﻿<Application x:Class="WpfAppApiClientNetCore.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WpfAppApiClientNetCore"
+             Startup="OnStartup">
+    <Application.Resources>
+        <ResourceDictionary>
+            <local:ViewModelLocator x:Key="Locator"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
