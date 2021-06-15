@@ -15,18 +15,43 @@ namespace WpfAppApiClientNetCore.Models.Tests
     [TestClass()]
     public class ApiConsumerModelTests
     {
+        //Model
         private Mock<IWebRequestLib> _webRequestLibMock;
+        //Model
         private ApiConsumerModel apiConsumerModel;
+        //Variable for storing return values of method
         private WebReturn _webReturn;
+        //IConfiguration Mocks
         private Mock<IConfiguration> _iConfig;
+        private Mock<IConfigurationSection> _iConfigSection;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _iConfig = new Mock<IConfiguration>();
+            //Initiating the objects for testing
             _webRequestLibMock = new Mock<IWebRequestLib>();
-            apiConsumerModel = new ApiConsumerModel(_webRequestLibMock.Object, _iConfig.Object);
             _webReturn = new WebReturn { code = 0, Etag = "", ResponseContent = "" };
+            _iConfig = new Mock<IConfiguration>();
+            _iConfigSection = new Mock<IConfigurationSection>();
+
+            _iConfigSection
+               .Setup(x => x.Value)
+               .Returns("https://gorest.co.in/public-api/");
+
+            _iConfig
+               .Setup(x => x.GetSection("MySettings:BaseURI"))
+               .Returns(_iConfigSection.Object);
+
+            _iConfigSection
+               .Setup(x => x.Value)
+               .Returns("fa114107311259f5f33e70a5d85de34a2499b4401da069af0b1d835cd5ec0d56");
+
+            _iConfig
+               .Setup(x => x.GetSection("MySettings:BearerToken"))
+               .Returns(_iConfigSection.Object);
+
+            apiConsumerModel = new ApiConsumerModel(_webRequestLibMock.Object, _iConfig.Object);
+
         }
         /// <summary>
         ///Test for retreiving the page of users, if the input is zero, it should not throw any errors, 
@@ -35,6 +60,9 @@ namespace WpfAppApiClientNetCore.Models.Tests
         [TestMethod()]
         public void GetPageAsyncTest_IfInputIsZero_ItShouldNotThrowErrorAsync()
         {
+            //_iConfig = new Mock<IConfiguration>();
+            _webRequestLibMock = new Mock<IWebRequestLib>();
+
             _webRequestLibMock.Setup(a => a.MyWebRequestMethodAsync(It.IsAny<WebRequest>())).ReturnsAsync(_webReturn);
             String Response = $"{{\"code\":404,\"meta\":null,\"data\":{{\"message\":\"Resource not found\"}}}}";
             var result = apiConsumerModel.GetPageAsync(0);

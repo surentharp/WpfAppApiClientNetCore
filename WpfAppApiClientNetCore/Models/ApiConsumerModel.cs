@@ -27,9 +27,9 @@ namespace WpfAppApiClientNetCore.Models
             //Instantiating the webqrequest class
             _webRequestLib = webRequestLib;
             //set base uri
-            BaseURI = _iConfig.GetSection("MySettings").GetSection("BaseURI").Value;
+            BaseURI = _iConfig.GetValue<string>("MySettings:BaseURI");
             //set bearer token
-            BearerToken = _iConfig.GetSection("MySettings").GetSection("BearerToken").Value;
+            BearerToken = _iConfig.GetValue<string>("MySettings:BearerToken");
         }
 
         //Method for retreving the page of users from api
