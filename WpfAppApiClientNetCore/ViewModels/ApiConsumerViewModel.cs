@@ -32,9 +32,9 @@ namespace WpfAppApiClientNetCore.ViewModels
         //Object for retreiving the received response from the api
         private List<RequestReturn> _myRequestReturns { get; set; }
         //Object for selected users from the list box
-        private Person _SelectedItem { get; set; }
+        private static Person _SelectedItem { get; set; }
         //Object for search user
-        private Person _SearchUser { get; set; }
+        private static Person _SearchUser { get; set; }
         //Command for going next page of the users retreived list
         public ICommand GetNextPageClick { get; set; }
         //Command for going previous page of the users retreived list
@@ -96,6 +96,8 @@ namespace WpfAppApiClientNetCore.ViewModels
             this.SelectedItem = new Person();
             this.SearchUser = new Person();
             this.IsSearchRecently = false;
+
+            _logger.Information("Welcome to view model");
 
         }
 
