@@ -6,6 +6,7 @@ using WpfAppApiClientNetCore.ViewModels;
 
 namespace WpfAppApiClientNetCore
 {
+    //Vuew Model Locator
     public class ViewModelLocator
     {
         //View model locator for our view models

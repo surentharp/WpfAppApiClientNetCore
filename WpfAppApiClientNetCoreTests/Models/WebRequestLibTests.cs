@@ -9,7 +9,7 @@ using RestSharp;
 
 namespace WpfAppApiClientNetCore.Models.Tests
 {
-    //class
+    //Web Request Test class
     [TestClass()]
     public class WebRequestLibTests
     {
