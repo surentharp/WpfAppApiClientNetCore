@@ -1,1 +1,3 @@
 # WpfAppApiClientNetCore
+
+Yet to document. 
